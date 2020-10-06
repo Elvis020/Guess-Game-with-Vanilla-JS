@@ -23,14 +23,24 @@ function playGame() {
     displayGuessHistory();
 }
 
-function initGame() {}
+function initGame() {
+    correctNumber = getRandomNumber();
+    document.getElementById("history").innerHTML = "";
+    document.getElementById("result").innerHTML = "";
+    guessHistory = [];
+    displayGuessHistory();
+
+}
 
 function guessResult(numberGuess) {
     if (numberGuess < correctNumber) {
+        document.querySelector('#number-guess').value = ""
         return showNumberBelow()
     } else if (numberGuess > correctNumber) {
+        document.querySelector('#number-guess').value = ""
         return showNumberAbove()
     } else if (numberGuess == correctNumber) {
+        document.querySelector('#number-guess').value = ""
         return showYouWon()
     }
 }
@@ -72,11 +82,12 @@ function showNumberBelow() {
 }
 
 function displayGuessHistory() {
-    let index = 0;
+    let index = guessHistory.length - 1; //This makes the array fill from the bottom becuz it starts from -1 not 0...Remember your indexes
     let listOfGuesses = "<ul class='list-group'>"
-    while (index < guessHistory.length) {
-        listOfGuesses += "<li class='list-group-item'>" + "You guessed " + guessHistory[index] + "</li>";
-        index++;
+    while (index >= 0) {
+        listOfGuesses += "<li class='list-group-item bg-dark text-light mb-2'>" + "You guessed " + guessHistory[index] + "</li>";
+        // Use -- instead of ++ becuz we are dealing with negative indexes
+        index--;
     }
 
     listOfGuesses += "</ul>";
@@ -84,5 +95,5 @@ function displayGuessHistory() {
 }
 
 function saveGuessHistory(guess) {
-    guessHistory.push(guess)
+    if (guess != correctNumber) return guessHistory.push(guess)
 }
