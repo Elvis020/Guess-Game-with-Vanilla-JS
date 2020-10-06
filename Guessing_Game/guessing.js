@@ -12,7 +12,6 @@ let guessHistory = []
 function getRandomNumber() {
     let randomNumber = Math.random() * 100 + 1;
     let wholeNumber = Math.floor(randomNumber);
-    console.log(wholeNumber);
     return wholeNumber
 }
 
